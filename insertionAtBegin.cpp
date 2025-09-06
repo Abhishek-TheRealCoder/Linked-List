@@ -13,7 +13,7 @@ class Node{
 };
 
 // pointer to pointer
-void insertAtBegin(Node**headPtr,int val){             
+void insertAtBegin(Node**headPtr,int val){     //pass by reference pointer         
     Node* newNode = new Node(val);  
                                         //                                             -------------------
                                         //                                            |    1    |   NULL  |
@@ -39,9 +39,26 @@ void insertAtBegin(Node**headPtr,int val){
     return ;
 }
 
+void insertionAtBeginning(Node*&head,int val){    //pass by reference variable &
+    Node* newNode = new Node(val);
+    if(head == NULL){
+        head = newNode;
+        return;
+    }
+    newNode -> next = head;
+    head = newNode;
+    return ;
+}
 
 void display(Node**head){
     Node*temp = *head;
+    while(temp != NULL){
+        cout<<temp->data<<" ";
+        temp = temp->next;
+    } 
+}
+void displayHead(Node*&head){
+    Node*temp = head;
     while(temp != NULL){
         cout<<temp->data<<" ";
         temp = temp->next;
@@ -56,7 +73,13 @@ int main(){
     display(&head);
     insertAtBegin(&head,5);
     cout<<endl;
-    display(&head);
+
+    Node* newHead = NULL;
+    insertionAtBeginning(newHead,10);
+    insertionAtBeginning(newHead,20);
+    insertionAtBeginning(newHead,30);
+    insertionAtBeginning(newHead,40);
+    displayHead(newHead);
     return 0;
 }
 
